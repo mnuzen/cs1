@@ -10,13 +10,13 @@ def complement(dnaString):
  ret = ""
  for c in dnaString:
   if c == "A":
-   ret+="T"
+   ret += "T"
   elif c == "T":
-   ret+="A"
+   ret += "A"
   elif c == "C":
-   ret+= "G"
+   ret += "G"
   elif c == "G":
-   ret+= "C"
+   ret += "C"
  return ret
 
 # B.2:
@@ -42,11 +42,8 @@ def product(numList):
  """Takes in a list of numbers numList and returns a number that is the 
  product of all numbers in numList. product(numList) --> product"""
  ret = 1
- if len(numList) < 0:
-  return ret
- else:
-  for n in numList:
-   ret = ret*n
+ for n in numList:
+  ret = ret*n
  return ret
 
 # B.4:
@@ -121,13 +118,15 @@ def any_in(list1,list2):
 # lst.reverse() doesn't assign anything to lst2. therefore, lst2 is currently
 # instead we can just eliminate the extra variable and say: 
 # lst.reverse()
-# return lst.append(0)
+# lst.append(0)
+# return lst
 
 # f - having list as the variable name in the parameter is not allowed. list is
-# already a named used in the Python language and therefore is automatically 
-# considered as the list object and not the name of a variable. an acceptable
-# way to fix this would be to change list and str to something like lst and 
-# string instead, so they aren't the same names as the object names in Python.
+# already a named used in the Python language and so whatever is passed in will 
+# be overridden. an acceptable way to fix this would be to change list and str 
+# to something like lst and string instead, so they aren't the same names as the
+# object names in Python. Also, extend should be used instead of append, since
+# append can only add strings to a list, instead of elements of another list.
 
 # C.2: the fact that a is assigned to 30 does not change the fact that when the 
 # line "c = b + a" was run, variable a at the time held the value of 10. since 
@@ -146,9 +145,9 @@ def any_in(list1,list2):
 # input required with the second function.
 
 # C.5: s[0].upper() returns only the uppercase version of s[0], which is only
-# referring to the first character of the string s. IMMUTABLE????????????/
+# referring to the first character of the string s.
 
 # C.6: you're not allowed to modify elements in a list while looping through 
 # them. changing the value of an element in the list does not modify the actual 
-# list. ?????????????????????????????????????????????????
+# list, it changes a copy of the element instead of the element itself.
 
