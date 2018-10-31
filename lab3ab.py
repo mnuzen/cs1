@@ -23,11 +23,11 @@ def file_info(txtname):
     ccount = 0
     while True:
         line = f.readline()
-        lcount+=1
-        wcount+=len(line.split())
-        ccount+=len(line)
         if line == "":
-            break
+            break 
+        lcount += 1
+        wcount += len(line.split())
+        ccount += len(line)
     f.close()
     return lcount, wcount, ccount
 
@@ -36,7 +36,7 @@ def file_info2(txtname):
     """Takes in a file and returns number of lines, words, and characters,
     except in the form of a dictionary."""
     nums = file_info(txtname)
-    (lcount,wcount,ccount) = nums
+    (lcount, wcount, ccount) = nums
     dic = {"lines": lcount, "words": wcount, "characters": ccount}
     return dic
 
@@ -44,16 +44,16 @@ def file_info2(txtname):
 def longest_line(txtname):
     """Takes in a file and returns the length of the longest file and the line
     itself in the form of a tuple. longest_line(txtname) -> (5,"hello")"""
-    longest=""
+    longest = ""
     f = open(txtname,'r')
     while True:
         line = f.readline()
         if line == "":
             break
-        if len(line)>len(longest):
+        if len(line) > len(longest):
             longest = line        
     f.close()   
-    return len(longest),longest
+    return len(longest), longest
 
 # A.6:
 def sort_words(string):
@@ -73,13 +73,36 @@ def sort_words(string):
 def binaryToDecimal(lst):
     """Takes in a list of numbers representing one binary number and returns
     the decimal value of that number"""
-    sum=0
+    sum = 0
     lst2 = list_reverse(lst)
     for i in range(len(lst)):
-        sum+=(lst2[i])*(2**i)
+        sum += (lst2[i])*(2**i)
     return sum
 
-# A.9:
+# A.9 [Honor Roll]:
 def decimalToBinary(integer):
-    """ """
+    """Takes in an integer and converts it to a list represent its binary
+    equivalent (the list does not have trailing zeros)."""
+    lst = []
+    while(integer > 0):
+        lst.append(integer%2)
+        integer = int(integer/2)
+    lst2 = list_reverse(lst)
+    return lst2
     
+# B.2.1:
+# 1) This function's name should be more specific than sc: it should be 
+# sum of cubes, or something like that. 
+# 2) There should be a space between # operators: a * a * a + b * b * b + 
+# c * c * c. 
+# 3) There should be spaces between the arguments: sc(a, b, c).
+
+# B.2.2: 
+# 1) The variables should be easier to read: sum_of_cubes or argument_a.
+# 2) There are grammatical typos in commenting.
+# 3) The return line should be shorter; less than 80 characters.
+# 4) The comment should also have a space after the # and capitalize the R.
+
+# B.2.3:
+# 1) There shouldn't be comments preceding code.
+# 2) There should be a line separating the two functions.
