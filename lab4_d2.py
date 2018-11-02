@@ -10,7 +10,7 @@ def draw_square(canvas, color, width, pos_tup):
     y1 = y - half
     x2 = x + half
     y2 = y + half
-    color[0] = canvas.create_rectangle(x1, y1, x2, y2, fill=color, \
+    return canvas.create_rectangle(x1, y1, x2, y2, fill=color, \
                                        outline=color)    
    
 if __name__ == '__main__':
