@@ -1,7 +1,8 @@
 from tkinter import *
 
 def draw_square(canvas, color, width, pos_tup):
-    """ """
+    """Takes in a canvas, color, squre width and a position in the form of a 
+    tuple and creates a square on given canvas."""
     half = width/2
     x = 0
     y = 0
@@ -14,8 +15,6 @@ def draw_square(canvas, color, width, pos_tup):
                                        outline=color)    
    
 if __name__ == '__main__':
-    """all other code
-    call draw 4x i guess"""
     root = Tk()
     root.geometry('800x600')
     c = Canvas(root, width = 800, height = 600)
