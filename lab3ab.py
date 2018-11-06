@@ -2,7 +2,7 @@
 def list_reverse(lst):
     """Takes in a list and returns the reverse as a separate list, leaving 
     the original list intact. list_reverse(lst) -> lst2"""
-    lst2 = lst
+    lst2 = lst[:]
     lst2.reverse()
     return lst2
 
@@ -10,8 +10,10 @@ def list_reverse(lst):
 def list_reverse2(lst):
     """Takes in a list and returns the reverse as a separate list, leaving 
     the original list intact. list_reverse(lst) -> lst2"""
-    lst2 = lst
-    return lst2[::-1]
+    lst2 = []
+    for i in range(len(lst)-1, -1, -1):
+        lst2.append(lst[i])
+    return lst2
 
 # A.3:
 def file_info(txtname):
@@ -106,3 +108,4 @@ def decimalToBinary(integer):
 # B.2.3:
 # 1) There shouldn't be comments preceding code.
 # 2) There should be a line separating the two functions.
+# 3) The indenting should be even between the two return statements.
