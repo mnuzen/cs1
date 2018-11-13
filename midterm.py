@@ -32,7 +32,6 @@ def draw_tictactoe(n):
     
 
 def test_draw_tictactoe():
-    
     print(draw_tictactoe(1))
     print(draw_tictactoe(2))
     print(draw_tictactoe(3))
@@ -83,8 +82,6 @@ def rpslk2(player1, player2):
     '''  '''
 
 # 2.3: 
-
-### Supplied to students.
 
 ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 suits = ['S', 'H', 'D', 'C']
@@ -145,17 +142,102 @@ def find_hand(p_rank):
             print('.', end='')
             sys.stdout.flush()
     print(hand, pr, count)
+    
+def histogram_rank(hand):
+    '''Takes in a hand and returns a dictionary of the number of times a value
+    appears within the hand.'''
+    lst_v = []
+    dic_v = {}
+    for card in list(hand):
+        (val, suit) = card
+        dic_v.update({val:suit})
+        lst_v.append(val)
+   
+    dic_r = {}    
+    key = list(dic_v.keys())
+    for k in key:
+        dic_r[k] = lst_v.count(k)  
+          
+    return dic_r
 
-### End supplied to students.
+def histogram_suit(hand):
+    '''Takes in a hand and returns a dictionary of the number of times a suit
+    appears within the hand.'''
+    lst_v = []
+    dic_v = {}
+    for card in list(hand):
+        (val, suit) = card
+        dic_v.update({suit:val})
+        lst_v.append(suit)
+   
+    dic_r = {}    
+    key = list(dic_v.keys())
+    for k in key:
+        dic_r[k] = lst_v.count(k)  
+          
+    return dic_r
 
-# Helper functions for 'poker_rank' function go here.
+def value(hand):
+    '''Returns the numerical ranking of each card in the hand.'''
+    ranks = {2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10, \
+             'J':11, 'Q':12, 'K':13, 'A':0}
+    lst = []
+    for card in hand:
+        (val, suit) = card
+        lst.append(ranks[val])
+    return lst
+
+def flush(vals):
+    '''Checks if values are in a straight flush'''
+    boo = False
+    count = 0
+    for i in range(0,3):
+        if vals[i] == vals[i+1]-1:
+            count += 1
+    if count >= 3:
+        boo = True
+    return boo
 
 def poker_rank(hand):
-    '''
-    DOCSTRING TODO
-    '''
+    '''Returns the rank of a poker hand.'''
+    validate_hand(hand)
+    rank = ""
+       
+    h_rank = histogram_rank(hand)
+    h_suit = histogram_suit(hand)
+    h_vals = value(hand)
+    
+    # check for no pair
+    if len(h_rank) == 5 and len(h_suit) != 1:
+        rank = "NP"
+        
+    # check for straight
+    if flush(h_vals):
+        rank = "ST"    
+    
+    # check for flush
+    if len(h_suit) == 1:
+        rank = "FL"
+        
+        if h_vals[4] == 0:
+            # remove A from list and check for royal flush
+            h_vals.remove(0)
+            h_vals.append(14)
+        if flush(h_vals):
+            rank = "SF"
+    
+    # check for pairs    
+    # find the largest number in the h_rank
+    # if that value is 4 then four of a kind
+    # if that value is 3 
+        # if the length is 2 then full house
+        # if the length is 5 then three of a kind
+    # if that value is 2 and the length is three then two pairs
+    # if that value is 2 and the length is 4 then one pair
 
-    pass  # TODO
+    return rank
+   
+
 
 
 # Part 3: Miniproject - Conway's Game of "Life"
