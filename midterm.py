@@ -23,10 +23,10 @@ def draw_tictactoe(n):
     assert n > 0
     ret = ""
 
-    base = " "*n + "|" + " "*n + "|" + " "*n + "\n"
+    base = " "*n + "|" + " "*n + "|\n"
     divide = "-"*n + "+" + "-"*n + "+" + "-"*n + "\n"
 
-    ret = base*n + divide + base*n + divide + base*n
+    ret = "\n" + base*n + divide + base*n + divide + base*n + "\n"
     
     return ret
     
