@@ -218,7 +218,6 @@ def poker_rank(hand):
     # check for flush
     if len(h_suit) == 1:
         rank = "FL"
-        
         if h_vals[4] == 0:
             # remove A from list and check for royal flush
             h_vals.remove(0)
@@ -226,15 +225,24 @@ def poker_rank(hand):
         if flush(h_vals):
             rank = "SF"
     
-    # check for pairs    
-    # find the largest number in the h_rank
-    # if that value is 4 then four of a kind
-    # if that value is 3 
-        # if the length is 2 then full house
-        # if the length is 5 then three of a kind
-    # if that value is 2 and the length is three then two pairs
-    # if that value is 2 and the length is 4 then one pair
-
+    # check for pairs  
+    vals = list(h_rank.values())
+    largest = max(vals)
+    length = len(vals)
+    
+    if largest == 4:
+        rank = "4K"
+    elif largest == 3:
+        if length == 2:
+            rank = "FH"
+        if length == 3:
+            rank = "3K"
+    elif largest == 2:
+        if length == 3:
+            rank = "2P"
+        if length == 4:
+            rank = "1P"
+            
     return rank
    
 
@@ -243,32 +251,77 @@ def poker_rank(hand):
 # Part 3: Miniproject - Conway's Game of "Life"
 
 def make_empty_board(nrows, ncols):
-    '''
-    DOCSTRING TODO
-    '''
-
-    pass  # TODO
+    '''Takes in the number of columns and rows and creates an empty board.'''
+    board = []
+    for i in range(0, nrows):
+        col = []        
+        for j in range(0, ncols):
+            col.append(0)
+        board.append(col)
+    return board
 
 def make_random_board(nrows, ncols, p):
-    '''
-    DOCSTRING TODO
-    '''
-
-    pass  # TODO
+    '''Returns a new board that is randomly filled with cells. '''
+    board = []
+    for i in range(0, nrows):
+        col = []        
+        for j in range(0, ncols):
+            rand = random.random()
+            if rand > p:
+                col.append(0)
+            else:
+                col.append(1)
+        board.append(col)
+    return board    
 
 def display_board(board):
-    '''
-    DOCSTRING TODO
-    '''
+    '''Takes in a Life board and returns Life board in graphic format.'''
+    rows = len(board)
+    cols = len(board[0])
+    ends = "+" + "-"*cols + "+\n"
+    l_board = ends
+    
+    for i in range(0, rows):
+        l_board += "|"
+        for j in range(0, cols):
+            if board[i][j] == 1:
+                l_board += "*"
+            else:
+                l_board += " "
+        l_board += "|\n"
+        
+    l_board += ends
+    return l_board
 
-    pass  # TODO
 
 def board_sums(board):
-    '''
-    DOCSTRING TODO
-    '''
+    '''Takes in a Life board and returns the neighbor sums.'''
+    rows = len(board)
+    cols = len(board[0])
+    s_board = make_empty_board(rows, cols)
+    
+    for i in list(range(0, rows)):
+        for j in list(range(0, cols)):
+            
+            for r in list(range(i-1, i+2)):
+                for c in list(range(j-1, j+2)):
+                    if r != i or c != j:
+                        if c >= 0 or r >= 0:
+                            if board[r%rows][c%cols] == 1:
+                                s_board[i][j] += 1
+                        elif c >= 0:
+                            if board[r][c%cols] == 1:
+                                s_board[i][j] += 1
+                        elif r >= 0:
+                            if board[r%rows][c] == 1:
+                                s_board[i][j] += 1
+                        else:
+                            if board[r][c] == 1:
+                                s_board[i][j] += 1
+                             
+    return s_board    
+    
 
-    pass  # TODO
 
 def display_board_sums(board):
     '''
