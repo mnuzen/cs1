@@ -324,26 +324,54 @@ def board_sums(board):
 
 
 def display_board_sums(board):
-    '''
-    DOCSTRING TODO
-    '''
-
-    pass  # TODO
+    '''Takes in a Life board and returns the sum board in graphic format.'''
+    board = board_sums(board)
+    rows = len(board)
+    cols = len(board[0])
+    ends = "+" + "-"*cols + "+\n"
+    l_board = ends
+    
+    for i in range(0, rows):
+        l_board += "|"
+        for j in range(0, cols):
+                l_board += str(board[i][j])
+        l_board += "|\n"
+        
+    l_board += ends
+    return l_board
 
 def board_update(board):
-    '''
-    DOCSTRING TODO
-    '''
+    '''Takes in a Life board and returns the next generation.'''
+    s_board = board_sums(board)
+    rows = len(board)
+    cols = len(board[0])
+    n_board = board    
+    
+    for i in range(0, rows):
+        for j in range(0, cols):
+            if s_board[i][j] == 3:
+                n_board[i][j] = 1
+            if s_board[i][j] < 2 or s_board[i][j] > 3:
+                n_board[i][j] = 0
+    return n_board
 
-    pass  # TODO
 
 def board_to_num(board):
-    '''
-    DOCSTRING TODO
-    '''
-
-    pass  # TODO
-
+    '''Computes a unique integer that represents the Life board.'''
+    rows = len(board)
+    cols = len(board[0])
+    ret = 0
+    n = 0
+    
+    for i in range(0, rows):
+        for j in range(0, cols):
+            ret += board[i][j]*(2**n)
+            n += 1
+    
+    return ret
+    
+    
+    
 ### Supplied to students:
 
 def interact(nrows, ncols, p):
