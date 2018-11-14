@@ -180,7 +180,7 @@ def histogram_suit(hand):
 def value(hand):
     '''Returns the numerical ranking of each card in the hand.'''
     ranks = {2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10, \
-             'J':11, 'Q':12, 'K':13, 'A':0}
+             'J':11, 'Q':12, 'K':13, 'A':1}
     lst = []
     for card in hand:
         (val, suit) = card
@@ -191,10 +191,17 @@ def flush(vals):
     '''Checks if values are in a straight flush'''
     boo = False
     count = 0
-    for i in range(0,3):
-        if vals[i] == vals[i+1]-1:
+    high = max(vals)
+    s = high
+    #need to check for royal flush bc now cards are not in order
+    for i in range(1, len(vals)):
+        if (high - i) in vals:
             count += 1
-    if count >= 3:
+            s += (high - i)
+            
+    if count >= len(vals)-1:
+        boo = True
+    elif count == 3 and s == 46 and (1 in vals):
         boo = True
     return boo
 
@@ -209,21 +216,18 @@ def poker_rank(hand):
     
     # check for no pair
     if len(h_rank) == 5 and len(h_suit) != 1:
-        rank = "NP"
-        
-    # check for straight
-    if flush(h_vals):
-        rank = "ST"    
+        rank = "NP" 
     
     # check for flush
     if len(h_suit) == 1:
         rank = "FL"
-        if h_vals[4] == 0:
-            # remove A from list and check for royal flush
-            h_vals.remove(0)
-            h_vals.append(14)
         if flush(h_vals):
             rank = "SF"
+              
+    # check for straight
+    else:
+        if flush(h_vals) and len(h_suit) != 1:
+            rank = "ST"       
     
     # check for pairs  
     vals = list(h_rank.values())
@@ -342,10 +346,11 @@ def display_board_sums(board):
 
 def board_update(board):
     '''Takes in a Life board and returns the next generation.'''
-    s_board = board_sums(board)
+    #cannot copy because refers to same items
+    n_board = [x[:] for x in board]
     rows = len(board)
     cols = len(board[0])
-    n_board = board    
+    s_board = board_sums(board)
     
     for i in range(0, rows):
         for j in range(0, cols):
@@ -353,6 +358,7 @@ def board_update(board):
                 n_board[i][j] = 1
             if s_board[i][j] < 2 or s_board[i][j] > 3:
                 n_board[i][j] = 0
+   
     return n_board
 
 
