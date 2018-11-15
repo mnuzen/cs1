@@ -9,7 +9,31 @@
 # 1.1:
 # 1) i % j = 0 is an assertion, and the boolean statement should read i % j == 0
 # 2) takes in a string 'n' always; the function should take in a variable n 
-# 3) 
+# 3) the function docstring must have triple quotations: ''' or """
+# 4) there must be a colon behind the while. while True: to indicate the 
+# beginning of the code that runs. 
+# 5) 
+
+# 1.2:
+# 1) the final print should print out num and count within one brace
+# print('{num : count}')
+# 2) variable count is not defined before printing
+# 3) hist[n] == 1 is a boolean expression and should be just hist[n] = 1
+# 4) the for loop only needs num as a key parameter to loop. with the key
+# you can find the count of the num by saying print('{num : hist[num]}')
+# 5) to loop through a dictionary keys, you need to use .keys() to extract
+# the keys and convert them to a list that you can iterate through.
+
+# 1.3:
+# 1) the function must have a function name that accurately describes its 
+# purpose.
+# 2) there should spaces between each operator: for example, tt = 0 
+# instead of tt=0.
+# 3) indenting should be four spaces.
+# 4) variable names should have something to do with what the variable
+# represents.
+# 5) comments should have a space after the #. like # 4, instead of #4. 
+# comments should also explain code clearly.
 
 # Part 2: Simple Functions 
 
@@ -45,7 +69,7 @@ def rps(player1, player2):
     winner.'''
     assert (player1 == "R") or (player1 == "P") or (player1 == "S")
     assert (player2 == "R") or (player2 == "P") or (player2 == "S")
-    
+
     w = int()
     
     dic = {"R":"S", "P":"R", "S":"P"}
