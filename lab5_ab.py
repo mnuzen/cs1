@@ -84,3 +84,36 @@ class Averager:
 # except '>' not supported between instances of 'str' and 'int':
 #     return "Input is not an integer."
 
+# 2. Location already defines the return value, so you can just return location.
+# Using "for i, item" is the same as using a nested loop, so instead, the loop 
+# should read:
+# for i in range(0,len(lst)):
+#     if lst[i] == x:
+#     found = True
+#     location = i
+# return location
+
+# 3. The variable category should be initialized before being used. 
+# def categorize(x):
+# '''Return a string categorizing the number 'x', which should be
+#    an integer.'''
+#    if type(x) == int:
+#        if x < 0:
+#            category = 'negative'
+#        if x == 0:
+#            category = 'zero'
+#        if x > 0 and x < 10:
+#            category = 'small'
+#        if x >= 10:
+#            category = 'large'
+#    else:
+#        category = 'non-integer.'
+#    return category
+
+# 4. You can shorten the entire function by writing:
+# def sum_list(lst):
+# '''Returns the sum of the elements of a list of numbers.'''
+#     answer = int()
+#     for i in range(0,len(lst)):
+#         answer += lst[i]
+#     return answer
