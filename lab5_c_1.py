@@ -1,10 +1,12 @@
 from tkinter import *
 import random
     
+global x0, y0 
+global lst
+    
 def draw_circle(canvas, color, x, y):
     '''Takes in a canvas, color, and a position in the form of a 
     tuple and creates a circle on given canvas. Generates random radius.'''
-    global lst
     r = random.randint(10, 50)
     # create circle list
     circ = canvas.create_circle(x, y, r, fill=color, \
@@ -37,7 +39,6 @@ def key_handler(event):
 def button_handler(event):
     '''Handle left mouse button click events.'''
     # take in position of the mouse button click
-    global x0, y0
     x0 = event.x
     y0 = event.y
 
@@ -50,6 +51,7 @@ if __name__ == '__main__':
     canvas.pack()
         
     # Generate initial random color
+    global r
     r = random_color()
 
     # Bind events to handlers.
