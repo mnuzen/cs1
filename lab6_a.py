@@ -29,6 +29,7 @@ grid[0][0] = 42
 
 # 10.
 temp = open('f.txt', 'r')
-print(readlines.upper())
+print(line.upper() for line in temp)
 
 # 11.
+s = s[::-1].upper()
