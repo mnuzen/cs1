@@ -81,18 +81,80 @@ class Sudoku:
         '''Takes in the row, column, and number to place at a location. It also
         checks that the inputs are valid coordinates, the move is valid, and 
         makes the move.'''
+        
+        # checks if the numbers are integers
         if type(row) != int:
             raise SudokuMoveError("The row number must be an integer.")
         if type(col) != int:
             raise SudokuMoveError("The column number must be an integer.")
         if type(val) != int:
             raise SudokuMoveError("The value must be be an integer.")
+        
+        # checks if the numbers are from 1 to 9
+        if 0 < row < 9:
+            raise SudokuMoveError("The row number must be from 1 to 9.")
+        if 0 < col < 9:
+            raise SudokuMoveError("The column number must be from 1 to 9.")
+        if 0 < val < 9:
+            raise SudokuMoveError("The value number must be from 1 to 9.")
+        
+        # checks if the move is valid
+        
+        # checks if box is empty
+        if self[row][col] == 0:
+            raise SudokuMoveError("You must choose an empty box.")
+    
+        # checks if row has that value
+        for r in range(0,9):
+            if self[r][col] == val:
+                raise SudokuMoveError("There is already a number" + val + \
+                                      "in that row.")
+    
+        # checks if column has that value
+        for c in range(0,9):
+            if self[row][c] == val:
+                raise SudokuMoveError("There is already a number" \
+                                      + val + "in that column.")
+        
+        # checks the surrounding box
+        for r in range(row-1, row+2):
+            for c in range(col-1, col+2):
+                if r != row and c != col:
+                    if self[r][c] == val:
+                        raise SudokuMoveError("There is already a number" + \
+                                              val + "in that box.")
+        
+        self[row][col] = val
+        self.moves.append((row, col, val))
 
     def undo(self):
-        # TODO
+        (row, col, val) = self.moves.pop()
+        self[row][col] = 0
+        
 
     def solve(self):
-        # TODO
+        while True:
+            try:
+                cmd = input('Enter a command.')
+            
+                if cmd == 'q':
+                    quit(0)
+            
+                elif type(cmd) == int:
+                    lst = [int(i) for i in str(cmd)]
+                    self.move(lst[0], lst[1], lst[2])
+            
+                elif cmd == 'u':
+                    self.undo()
+                
+                elif cmd[:2] == 's ':
+                    self.save(cmd[2:])
+                    
+                else:
+                    raise SudokuCommandError("You must enter a valid command.")
+                    
+                except SudokuMoveError:
+                    raise SudokuMoveError("Invalid move.") 
 
 if __name__ == '__main__':
     s = Sudoku()
