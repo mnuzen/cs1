@@ -141,8 +141,23 @@ def partition_connected(locset):
     '''
 
     assert is_locset(locset)
+    
+    clocset = locset.copy()
+    
+    retlst = []     
+    
+    while len(clocset) != 0:
+        a = clocset.pop()
+        cc = collect_connected(a, locset)
+        retlst.append(cc)
+        for c in cc:
+            if c in clocset:
+                clocset.remove(c)
+    
+    assert disjoint_subsets(retlst)
+    
+    return retlst
 
-    pass  # TODO
 
 def filter_locset(locset):
     '''
@@ -162,7 +177,21 @@ def filter_locset(locset):
     '''
 
     assert is_locset(locset)
+    
+    retlst = partition_connected(locset)
+    
+    big = set()
+    small = set()    
+    
+    for r in retlst:
+        if len(r) >= 3:
+            big.add(r)
+        else:
+            small.add(r)
+    
+    ret = (big, small)
+    
+    return ret
 
-    pass  # TODO
 
 
