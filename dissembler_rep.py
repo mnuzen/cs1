@@ -125,8 +125,19 @@ def remove_connected_groups(rep):
     '''
 
     assert is_rep(rep)
+    
+    #remaining location/color pairs
+    ret1 = {}
+    #location/color pairs meant to be removed
+    ret2 = {}
+    
+    
+    
+    ret = (ret1, ret2)
+                  
+    return ret   
+    
 
-    pass  # TODO
 
 def adjacent_moves(nrows, ncols):
     '''
