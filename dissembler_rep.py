@@ -131,11 +131,21 @@ def remove_connected_groups(rep):
     #location/color pairs meant to be removed
     ret2 = {}
     
+    nums = set()
+    inverted = invert_rep(rep)
+    
+    keys = rep.keys()
+    
+    for key in keys:
+        nums.add(key)
+    
+    filtered = ls.filter_locset(nums)
+    
     
     
     ret = (ret1, ret2)
                   
-    return ret   
+    return ret
     
 
 
@@ -162,8 +172,28 @@ def adjacent_moves(nrows, ncols):
 
     assert type(nrows) is int and type(ncols) is int
     assert nrows > 0 and ncols > 0
+    
+    ret = set()
+    
+    loc = set() 
+    adj = {}
+    
+    while nrows >= 0:
+        while ncols >= 0:
+            location = (nrows, ncols)
+            loc.add(location)
+            adj[location] = ls.collect_adjacent(location, loc)
+            nrows -= 1
+            ncols -= 1
+        
+    keys = adj.keys()
+        
+    for key in keys:
+        for l in adj[key]:
+            ret.add((key, l))
+            
+    return ret
 
-    pass  # TODO
 
 def possible_moves(rep, nrows, ncols):
     '''
@@ -188,6 +218,9 @@ def possible_moves(rep, nrows, ncols):
     assert is_rep(rep)
     assert type(nrows) is int and type(ncols) is int
     assert nrows > 0 and ncols > 0
+    
+    ret = set()
+    
+    return ret
 
-    pass  # TODO
 

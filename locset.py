@@ -185,9 +185,9 @@ def filter_locset(locset):
     
     for r in retlst:
         if len(r) >= 3:
-            big.add(r)
+            big.update(r)
         else:
-            small.add(r)
+            small.update(r)
     
     ret = (big, small)
     
